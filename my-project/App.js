@@ -2,6 +2,7 @@ import React , {useState} from "react"
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import Cabecalho from './src/componentes/Cabecalho';
 import NovosItens from "./src/componentes/NovosItens";
+import AdicionarItem from "./src/componentes/AdicionarItem";
 
 export default function App() {
 
@@ -19,10 +20,20 @@ export default function App() {
     )
   }
 
+  const submeterInformacao = (texto) => {
+    setLista((prevLista) => {
+      return [
+        {texto: texto, key: Math.random().toString()},
+        ...prevLista
+      ]
+    })
+  }
+
   return (
     <View style={styles.container}>
       <Cabecalho />
       <View style={styles.coneudo}>
+        <AdicionarItem funcao={submeterInformacao} />
         <View style={styles.estiloLista}>
           <FlatList 
             data={lista}
